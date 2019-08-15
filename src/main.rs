@@ -40,7 +40,6 @@ fn main() {
 
     let bvh_tree = BvhTree::build(&mut hitable_list, &mut rnd);
 
-    // let bvh_tree : Box<Hitable> = Box::new(hitable_list);
     let samples_per_pixel = 1024;
     let thread_count = 24;
 
@@ -212,7 +211,6 @@ fn random_scene(rnd: &mut Random) -> Vec<Box<Hitable>> {
             );
             if (center - Vec3::from(4.0, 0.2, 0.0)).length() > 0.9 {
                 let material: Box<Material> = match choose_mat {
-                    // diffuse
                     x if x < 0.8 => Box::new(Lambertian::with_albedo(Vec3::from(
                         rnd.gen() * rnd.gen(),
                         rnd.gen() * rnd.gen(),
