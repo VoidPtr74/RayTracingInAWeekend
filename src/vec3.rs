@@ -81,11 +81,11 @@ impl Vec3 {
     }
 
     pub fn normalise(&mut self) {
-        *self /= self.length();
+        *self = self.direct_product(&self.inv_len())
     }
 
     pub fn make_normalised(&self) -> Self {
-        self / self.length()
+        self.direct_product(&self.inv_len())
     }
 
     pub fn direct_product(&self, other: &Self) -> Self {
@@ -224,6 +224,13 @@ impl ops::DivAssign<f32> for Vec3 {
 
 // "Private" implementation details
 impl Vec3 {
+    fn inv_len(&self) -> Vec3 {
+        unsafe {
+            let length = _mm_dp_ps(self.sse, self.sse, 0x7f);
+            Vec3 {sse : _mm_rsqrt_ps(length) }
+        }
+    }
+
     unsafe fn add_self(&mut self, other: &Self) {
         self.sse = _mm_add_ps(self.sse, other.sse);
     }
