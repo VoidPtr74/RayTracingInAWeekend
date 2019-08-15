@@ -4,7 +4,7 @@
 
 ## Overview
 
-Yet another implementation of a simple ray-tracer Peter Shirley's "[Ray Tracing in One Weekend](https://github.com/petershirley/raytracinginoneweekend)" in Rust.
+Yet another implementation of a simple ray-tracer based on Peter Shirley's "[Ray Tracing in One Weekend](https://github.com/petershirley/raytracinginoneweekend)" written in Rust.
 
 This implementation goes a little further from the first weekend by also using the BVH tree from [the next week](https://github.com/RayTracing/TheNextWeek) to improve rendering speed.
 
