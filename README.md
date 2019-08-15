@@ -20,4 +20,4 @@ For best performance, I recommend building for and running on a cpu that support
 
 ## Notes
 
-The implementation for vec3 and enhancements to AABB were translated from [GPSnoopy](https://github.com/GPSnoopy)'s C++ implementation of [the next week](https://github.com/GPSnoopy/RayTracingTheNextWeek) 
+Much of the implementation for vec3 and enhancements to AABB were translated from [GPSnoopy](https://github.com/GPSnoopy)'s C++ implementation of [the next week](https://github.com/GPSnoopy/RayTracingTheNextWeek) 
