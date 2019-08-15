@@ -224,10 +224,12 @@ impl ops::DivAssign<f32> for Vec3 {
 
 // "Private" implementation details
 impl Vec3 {
-    fn inv_len(&self) -> Vec3 {
+    fn inv_len(&self) -> Self {
         unsafe {
             let length = _mm_dp_ps(self.sse, self.sse, 0x7f);
-            Vec3 {sse : _mm_rsqrt_ps(length) }
+            Self {
+                sse: _mm_rsqrt_ps(length),
+            }
         }
     }
 
