@@ -280,7 +280,7 @@ impl Vec3 {
 
 pub fn random_in_unit_sphere(rnd: &mut Random) -> Vec3 {
     loop {
-        let p = Vec3::from(rnd.gen(), rnd.gen(), rnd.gen());
+        let p = &Vec3::from(rnd.gen() - 0.5, rnd.gen() - 0.5, rnd.gen() - 0.5) * 2.0;
         if p.square_length() <= 1.0 {
             break p;
         }
