@@ -13,23 +13,23 @@ pub trait Hitable: Send + Sync {
 }
 
 pub struct BvhTree {
-    pub root: Box<Hitable>,
+    pub root: Box<dyn Hitable>,
 }
 
 pub struct BvhNode {
     pub bounding_box: Aabb,
-    pub left: Box<Hitable>,
-    pub right: Box<Hitable>,
+    pub left: Box<dyn Hitable>,
+    pub right: Box<dyn Hitable>,
 }
 
 pub struct Sphere {
     pub center: Vec3,
     pub radius: f32,
-    pub material: Box<Material>,
+    pub material: Box<dyn Material>,
 }
 
 impl BvhTree {
-    pub fn build(hitables: &mut Vec<Box<Hitable>>, rnd: &mut Random) -> Self {
+    pub fn build(hitables: &mut Vec<Box<dyn Hitable>>, rnd: &mut Random) -> Self {
         BvhTree {
             root: BvhNode::build_bvh_tree(hitables, rnd),
         }
@@ -37,7 +37,7 @@ impl BvhTree {
 }
 
 impl BvhNode {
-    fn build_bvh_tree(hitables: &mut Vec<Box<Hitable>>, rnd: &mut Random) -> Box<Hitable> {
+    fn build_bvh_tree(hitables: &mut Vec<Box<dyn Hitable>>, rnd: &mut Random) -> Box<dyn Hitable> {
         match hitables.len() {
             1 => return hitables.remove(0),
             2 => {
@@ -65,7 +65,7 @@ impl BvhNode {
         Box::new(Self::create(left, right))
     }
 
-    fn create(left: Box<Hitable>, right: Box<Hitable>) -> BvhNode {
+    fn create(left: Box<dyn Hitable>, right: Box<dyn Hitable>) -> BvhNode {
         let bounding_box = Aabb::surrounding_box(&left.bounding_box(), &right.bounding_box());
         BvhNode {
             bounding_box,

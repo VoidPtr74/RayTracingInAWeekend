@@ -193,9 +193,9 @@ fn get_segment(thread_count: usize, thread_index: usize, ny: usize) -> (usize, u
     (lower, upper)
 }
 
-fn random_scene(rnd: &mut Random) -> Vec<Box<Hitable>> {
+fn random_scene(rnd: &mut Random) -> Vec<Box<dyn Hitable>> {
     let n = 500;
-    let mut list: Vec<Box<Hitable>> = Vec::with_capacity(n + 1);
+    let mut list: Vec<Box<dyn Hitable>> = Vec::with_capacity(n + 1);
     list.push(build_sphere(
         Vec3::from(0.0, -1000.0, 0.0),
         1000.0,
@@ -210,7 +210,7 @@ fn random_scene(rnd: &mut Random) -> Vec<Box<Hitable>> {
                 f32::from(b) + 0.9 * rnd.gen(),
             );
             if (center - Vec3::from(4.0, 0.2, 0.0)).length() > 0.9 {
-                let material: Box<Material> = match choose_mat {
+                let material: Box<dyn Material> = match choose_mat {
                     x if x < 0.8 => Box::new(Lambertian::with_albedo(Vec3::from(
                         rnd.gen() * rnd.gen(),
                         rnd.gen() * rnd.gen(),
@@ -247,7 +247,7 @@ fn random_scene(rnd: &mut Random) -> Vec<Box<Hitable>> {
     list
 }
 
-fn build_sphere(center: Vec3, radius: f32, material: Box<Material>) -> Box<Hitable> {
+fn build_sphere(center: Vec3, radius: f32, material: Box<dyn Material>) -> Box<dyn Hitable> {
     let sphere = Sphere {
         center,
         radius,
